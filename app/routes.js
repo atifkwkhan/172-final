@@ -38,6 +38,27 @@ module.exports = function(app) {
 
 	});
 
+
+	// delete
+	app.delete('/api/todos/:todo_id', function(req, res) {
+
+		Todo.remove({
+			_id : req.params.todo_id
+
+		}, function(err, todo) {
+			if (err)
+
+				res.send(err);
+
+
+			Todo.find(function(err, todos) {
+				if (err)
+					res.send(err)
+				res.json(todos);
+			});
+		});
+	});
+
 	// application -------------------------------------------------------------
 	app.get('*', function(req, res) {
 		res.sendfile('./client/index.html'); // load the single view file (angular will handle the page changes on the front-end)

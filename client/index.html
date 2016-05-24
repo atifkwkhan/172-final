@@ -17,6 +17,13 @@
 		body 					{ padding-top:50px; }
 		#todo-list 				{ margin-bottom:30px; }
 		#todo-form 	 			{ margin-bottom:50px; }
+
+
+		.strikeIt{
+			text-decoration: line-through;
+			background-color:#f0f0f0;; color:#FF0000;
+		}
+
 	</style>
 
 	<!-- SPELLS -->
@@ -41,9 +48,11 @@
 			<div class="col-sm-4 col-sm-offset-4">
 
 				<div class="checkbox"  ng-repeat="todo in todos">
-                                  <label>
-                                  <input type="checkbox"> {{ todo.text }}
+                                  <label ng-class="{strikeIt: item}">
+                                  <input type="checkbox" ng-model="item" ng-change="isStriked()"> {{ todo.text }}
                                   </label>
+					              <button ng-model="ko" ng-click="koIt()">Snooze</button>
+					              <button ng-click="killIt()">Delete</button>
                                  </div>
                              
 				<p class="text-center" ng-show="loading">
